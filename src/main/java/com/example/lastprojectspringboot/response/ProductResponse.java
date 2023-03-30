@@ -7,10 +7,14 @@ public class ProductResponse {
 
         Long id;
         String productName;
+        String description;
+         Float price;
 
         public ProductResponse(Product entity) {
             this.id = entity.getProductId();
             this.productName = entity.getProductName();
+            this.description=entity.getDescription();
+            this.price=entity.getPrice();
         }
     }
 

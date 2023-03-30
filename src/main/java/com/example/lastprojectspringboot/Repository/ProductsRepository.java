@@ -7,4 +7,6 @@ public interface ProductsRepository extends JpaRepository<Product, Long> {
 
     Product findByProductName(String productName);
     Product findByProductId(Long productId);
+    Product findByPriceEquals(Float price);
+    Product save(Product product);
 }

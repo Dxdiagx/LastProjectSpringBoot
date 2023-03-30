@@ -15,7 +15,7 @@ public class ProductsController {
         this.productsRepository = productsRepository;
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     public List<Product> getAllProducts(){
         return productsRepository.findAll();
     }
@@ -27,5 +27,30 @@ public class ProductsController {
         }
         return new ProductResponse(product);
     }
+    @GetMapping("name/{productName}")
+    public ProductResponse getOneProductName(@PathVariable String productName){
+        Product product = productsRepository.findByProductName(productName);
+        if(product == null) {
+            return null;
+        }
+        return new ProductResponse(product);
     }
+    @GetMapping("price/{productPrice}")
+    public ProductResponse getOneProductForPrice(@PathVariable Float productPrice){
+        Product product = productsRepository.findByPriceEquals(productPrice);
+        if(product == null) {
+            return null;
+        }
+        return new ProductResponse(product);
+    }
+    @PostMapping("/save")
+    public ProductResponse postProduct(@RequestBody Product product) {
+        Product savedProduct = productsRepository.save(product);
+        if (savedProduct == null) {
+            return null;
+        }
+        return new ProductResponse(savedProduct);
+    }
+}
+
 
