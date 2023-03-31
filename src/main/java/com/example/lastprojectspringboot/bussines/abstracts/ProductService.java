@@ -14,6 +14,6 @@ public interface ProductService {
     public ProductResponse getOneProduct(@PathVariable Long productId);
     public ProductResponse getOneProductName(@PathVariable String productName);
     public ProductResponse getOneProductForPrice(@PathVariable Float productPrice);
-    public ProductResponse postProduct(@RequestBody Product product);
+    public ProductResponse saveProduct(@RequestBody Product product);
 
 }

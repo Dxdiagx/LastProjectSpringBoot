@@ -1,8 +1,9 @@
 package com.example.lastprojectspringboot.controller;
-import com.example.lastprojectspringboot.Repository.ProductsRepository;
 import com.example.lastprojectspringboot.bussines.abstracts.ProductService;
 import com.example.lastprojectspringboot.entities.Product;
 import com.example.lastprojectspringboot.response.ProductResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,8 +11,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/products")
 public class ProductsController {
- private ProductService productService;   /// Bunun üzerinden güncelleme yapılacak.
-  ProductsController(ProductService productService) {
+ private final ProductService productService;   /// Bunun üzerinden güncelleme yapılacak.
+  @Autowired
+    ProductsController(ProductService productService) {
       this.productService =productService;
     }
 
@@ -32,10 +34,11 @@ public class ProductsController {
        return productService.getOneProductForPrice(productPrice);
     }
     @PostMapping("/save")
-    public ProductResponse postProduct(@RequestBody Product product) {
+    public ProductResponse saveProduct(@RequestBody Product product) {
 
-        return productService.postProduct(product);
+        return productService.saveProduct(product);
     }
+
 }
 
 
