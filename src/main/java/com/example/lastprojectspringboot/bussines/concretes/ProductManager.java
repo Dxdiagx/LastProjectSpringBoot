@@ -1,4 +1,4 @@
-package com.example.lastprojectspringboot.concretes;
+package com.example.lastprojectspringboot.bussines.concretes;
 
 import com.example.lastprojectspringboot.Repository.ProductsRepository;
 import com.example.lastprojectspringboot.bussines.abstracts.ProductService;
