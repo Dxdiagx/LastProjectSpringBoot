@@ -1,27 +1,26 @@
 package com.example.lastprojectspringboot.bussines.concretes;
-import com.example.lastprojectspringboot.Repository.ProductsRepository;
+import com.example.lastprojectspringboot.Repository.ProductRepository;
 import com.example.lastprojectspringboot.bussines.abstracts.ProductService;
 import com.example.lastprojectspringboot.entities.Product;
 import com.example.lastprojectspringboot.response.ProductResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public class ProductManager implements ProductService {
-private  ProductsRepository productsRepository;
+    @Autowired
+    private ProductRepository productRepository;
 
-    public ProductManager(ProductsRepository productsRepository) {
-        this.productsRepository = productsRepository;
-    }
 
     @Override
     public List<Product> getAllProducts() {
-        return productsRepository.findAll();
+        return productRepository.findAll();
     }
 
     @Override
-    public ProductResponse getOneProduct(Long productId) {
-        Product product = productsRepository.findByProductId(productId);
+    public ProductResponse getOneProduct(int productId) {
+        Product product = productRepository.findByProductId(productId);
         if(product == null) {
             return null;
         }
@@ -30,7 +29,7 @@ private  ProductsRepository productsRepository;
 
     @Override
     public ProductResponse getOneProductName(String productName) {
-        Product product = productsRepository.findByProductName(productName);
+        Product product = productRepository.findByProductName(productName);
         if(product == null) {
             return null;
         }
@@ -39,7 +38,7 @@ private  ProductsRepository productsRepository;
 
     @Override
     public ProductResponse getOneProductForPrice(Float productPrice) {
-        Product product = productsRepository.findByPriceEquals(productPrice);
+        Product product = productRepository.findByPriceEquals(productPrice);
         if(product == null) {
             return null;
         }
@@ -48,11 +47,15 @@ private  ProductsRepository productsRepository;
 
     @Override
     public ProductResponse saveProduct(Product product) {
-        Product savedProduct = productsRepository.save(product);
+        Product savedProduct = productRepository.save(product);
         if (savedProduct == null) {
             return null;
         }
         return new ProductResponse(savedProduct);
+    }
+    @Override
+    public List<Product> findAllByCategoryId(int categoryId){
+        return productRepository.findProductByCategory_CategoryId(categoryId);
     }
 
 }

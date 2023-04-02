@@ -1,12 +1,11 @@
 package com.example.lastprojectspringboot.response;
 import com.example.lastprojectspringboot.entities.Product;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Data
 public class ProductResponse {
 
-        Long id;
+        int id;
         String productName;
         String description;
          Float price;

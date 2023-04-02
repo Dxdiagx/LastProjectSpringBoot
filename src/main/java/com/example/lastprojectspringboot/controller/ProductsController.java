@@ -3,7 +3,6 @@ import com.example.lastprojectspringboot.bussines.abstracts.ProductService;
 import com.example.lastprojectspringboot.entities.Product;
 import com.example.lastprojectspringboot.response.ProductResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +21,7 @@ public class ProductsController {
         return productService.getAllProducts();
     }
     @GetMapping("/{productId}")
-    public ProductResponse getOneProduct(@PathVariable Long productId){
+    public ProductResponse getOneProduct(@PathVariable int productId){
    return productService.getOneProduct(productId);
     }
     @GetMapping("name/{productName}")
@@ -33,11 +32,16 @@ public class ProductsController {
     public ProductResponse getOneProductForPrice(@PathVariable Float productPrice){
        return productService.getOneProductForPrice(productPrice);
     }
+    @GetMapping("category/{categoryId}")
+    public List<Product> findAllCategoryId(@PathVariable int categoryId){
+      return productService.findAllByCategoryId(categoryId);
+    }
     @PostMapping("/save")
     public ProductResponse saveProduct(@RequestBody Product product) {
 
         return productService.saveProduct(product);
     }
+
 
 }
 

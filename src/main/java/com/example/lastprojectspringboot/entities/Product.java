@@ -1,26 +1,35 @@
 package com.example.lastprojectspringboot.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Data;
 
 
 @Entity
 @Table(name="product")
+@Data
 public class Product {
+
     @Id
     @GeneratedValue
     @Column(name = "product_id")
-    Long productId;
+    int productId;
     @Column(name = "product_name")
     String productName;
     @Column(name = "product_description")
     String description;
     @Column(name = "product_price")
     Float price;
-    public Long getProductId() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    @JsonIgnore
+    private Category category;
+
+    public int getProductId() {
         return productId;
     }
 
-    public void setProduct_Id(Long productId) {
+    public void setProductId(int productId) {
         this.productId = productId;
     }
 
@@ -45,7 +54,7 @@ public class Product {
     }
 
     public void setPrice(Float price) {
-        if(price>0)
-        this.price = price;
+        if(price != null && price >= 0)
+            this.price = price;
     }
 }

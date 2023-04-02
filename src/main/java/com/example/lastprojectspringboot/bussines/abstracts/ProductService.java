@@ -10,10 +10,10 @@ import java.util.List;
 @Service
 public interface ProductService {
 
-    public List<Product> getAllProducts();
-    public ProductResponse getOneProduct(@PathVariable Long productId);
-    public ProductResponse getOneProductName(@PathVariable String productName);
-    public ProductResponse getOneProductForPrice(@PathVariable Float productPrice);
-    public ProductResponse saveProduct(@RequestBody Product product);
-
+    List<Product> getAllProducts();
+     ProductResponse getOneProduct(@PathVariable int productId);
+     ProductResponse getOneProductName(@PathVariable String productName);
+     ProductResponse getOneProductForPrice(@PathVariable Float productPrice);
+     ProductResponse saveProduct(@RequestBody Product product);
+    List<Product> findAllByCategoryId(int categoryId);
 }
